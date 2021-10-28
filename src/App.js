@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 const App = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  
   return (
     <div className="bg-white w-screen h-screen flex">
       <div className="bg-gray-100 bg-opacity-50 m-auto items-center w-2/5 h-auto border border-gray-400 rounded-lg">
@@ -14,12 +18,18 @@ const App = () => {
               aria-label="Please enter your username"
               placeholder="username"
               className="text-sm text-grey-base w-4/5 m-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
+              onChange={(event) => {
+                setUsername(event.target.value);
+              }}
             />
             <input
               type="password"
               placeholder="password"
               aria-label="Please enter your password"
               className="text-sm text-grey-base w-4/5 m-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2"
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
             />
             <div className="flex flex-col justify-center">
               <button

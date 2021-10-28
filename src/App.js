@@ -40,7 +40,7 @@ const App = () => {
             <div className="flex flex-col justify-center">
               <button
                 type="button"
-                className="bg-blue-400 w-1/2 text-white p-2 rounded mx-auto m-3"
+                className="bg-blue-500 w-1/2 text-white p-2 rounded mx-auto m-3"
                 onClick={Login}
               >
                 Admin Login

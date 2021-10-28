@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-
+import axios from 'axios'
 const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  
+  const Login = () =>{
+    axios.get('http://localhost:3001/login',{
+      params: {  username, password }
+    }).then((response)=>{
+      console.log(response.data);
+    })
+  }
   return (
     <div className="bg-white w-screen h-screen flex">
       <div className="bg-gray-100 bg-opacity-50 m-auto items-center w-2/5 h-auto border border-gray-400 rounded-lg">
@@ -35,6 +41,7 @@ const App = () => {
               <button
                 type="button"
                 className="bg-blue-400 w-1/2 text-white p-2 rounded mx-auto m-3"
+                onClick={Login}
               >
                 Admin Login
               </button>

@@ -17,10 +17,9 @@ const db = mysql.createConnection({
 app.get("/login", (req, res) => {
   const username = req.query.username;
   const password = req.query.password;
-  console.log(username);
-  console.log(password);
+
   db.query(
-    "Select count(*) as num from user where uname=? and upassword = ? ",
+    "Select count(*) as num, uname from user where uname=? and upassword = ? ",
     [username, password],
     (err, result) => {
         if(err){

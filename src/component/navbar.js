@@ -1,18 +1,10 @@
-import React, { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import React from "react";
+import { Disclosure } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { useGlobalContext } from "../context";
 
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-];
-
-const navbar = () => {
+const Navbar = () => {
+  const { LoginName } = useGlobalContext();
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -51,7 +43,7 @@ const navbar = () => {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center">
-                  <h1 className="text-white">username</h1>
+                  <h1 className="text-white">{LoginName}</h1>
                 </div>
               </div>
             </div>
@@ -78,4 +70,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default Navbar;

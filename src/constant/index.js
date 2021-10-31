@@ -1,2 +1,2 @@
-export const HomePagePath = '/';
+export const LoginPagePath = '/';
 export const MainPagePath = '/main'

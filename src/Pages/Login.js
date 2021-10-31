@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import * as ROUTES from "../constant";
-import { useGlobalContext } from "../context";
-import ErrorMessage from '../component/ErrorMessage'
-
+import ErrorMessage from "../component/ErrorMessage";
 
 const Login = () => {
-  const { setLoginName } = useGlobalContext();
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +18,7 @@ const Login = () => {
       })
       .then((response) => {
         if (response.data.num > 0) {
-          setLoginName(response.data.uname);
+          localStorage.setItem("LoginUser", response.data.uname);
           history.push(ROUTES.MainPagePath);
         } else {
           setError("Wrong username or password");
@@ -33,7 +30,7 @@ const Login = () => {
   };
   return (
     <div className="bg-white w-screen h-screen flex flex-col">
-      {error && <ErrorMessage error={error} setError={setError}/>}
+      {error && <ErrorMessage error={error} setError={setError} />}
       <div className="bg-gray-200 bg-opacity-50 m-auto items-center w-2/6 h-auto rounded-2xl shadow-lg">
         <div className="flex flex-col w-4/5 h-auto justify-center mx-auto">
           <p className="flex justify-center text-3xl font-medium m-3 text-center">

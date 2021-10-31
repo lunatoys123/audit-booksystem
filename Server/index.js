@@ -22,15 +22,24 @@ app.get("/login", (req, res) => {
     "Select count(*) as num, uname from user where uname=? and upassword = ? ",
     [username, password],
     (err, result) => {
-        if(err){
-            console.log(err)
-        }else{
-            console.log(result);
-            res.send(...result);
-        }
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(...result);
+      }
     }
   );
+});
 
+app.get("/AllBooks", (req, res) => {
+  db.query("select acc, title, author, year, publisher, unix_timestamp(date) * 1000 as stamp, categories, scategories, bstatus from bookmaster limit 5", (err, result) => {
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      res.send(result);
+    }
+  })
 });
 
 app.listen(3001, () => {

@@ -1,10 +1,9 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { useGlobalContext } from "../context";
 
 const Navbar = () => {
-  const { LoginName } = useGlobalContext();
+  const LoginName = localStorage.getItem('LoginUser');
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

@@ -1,11 +1,15 @@
 import React from "react";
-
-import Navbar from '../component/navbar'
+import Navbar from "../component/navbar";
+import SearchTable from "../component/SearchTable";
 
 const Main = () => {
-  
+ 
+
   return (
-    <Navbar />
+    <>
+      <Navbar />
+      <SearchTable />
+    </>
   );
 };
 

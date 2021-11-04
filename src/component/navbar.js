@@ -1,9 +1,11 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { useSelector } from "react-redux";
+import { selectLoginName } from "../redux/user/userslice";
 
 const Navbar = () => {
-  const LoginName = localStorage.getItem('LoginUser');
+  const LoginName = useSelector(selectLoginName);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -27,18 +29,18 @@ const Navbar = () => {
                 </div>
                 <div className="hidden sm:flex sm:ml-6 items-center justify-center">
                   <div className="flex space-x-4">
-                    <a
+                    <button
                       className=" hover:bg-gray-700 text-white
                           px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Admin
-                    </a>
-                    <a
+                    </button>
+                    <button
                       className=" hover:bg-gray-700 text-white
                           px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Book
-                    </a>
+                    </button>
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center">

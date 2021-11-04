@@ -19,7 +19,7 @@ app.get("/login", (req, res) => {
   const password = req.query.password;
 
   db.query(
-    "Select count(*) as num, uname from user where uname=? and upassword = ? ",
+    "Select uname from user where uname=? and upassword = ? ",
     [username, password],
     (err, result) => {
       if (err) {

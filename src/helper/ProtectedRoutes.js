@@ -10,7 +10,7 @@ export default function ProtectedRoutes({
     <Route
       {...rest}
       render={({ location }) => {
-        if (localStorage.getItem('LoginUser')) {
+        if (loggedInName) {
           return children;
         }
 

@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLimit, fetchBooks, selectData, selectPage } from "../redux/user/Dataslice";
 const SearchTable = () => {
   const [TableData, setTableData] = useState([]);
+  const dispatch = useDispatch();
+
+  const[Title, setTitle] = useState('');
+  const[Author, setAuthor] = useState('');
+  const[Publisher, setPublisher] = useState('');
+  const[Year, setYear] = useState('');
+  const[categories, setCategories] = useState('');
+  const[SecondCategories, setSecondCategories] = useState('');
+
+  const limit = useSelector(selectLimit);
+  const page = useSelector(selectPage);
 
   useEffect(() => {
     axios.get("http://localhost:3001/AllBooks").then((response) => {
       console.log(response);
       setTableData(response.data);
     });
+
   }, []);
   return (
     <div className="flex flex-col w-11/12 mx-auto">
@@ -99,7 +113,9 @@ const SearchTable = () => {
                         </div>
                       </td>
                       <td className="px-3 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{new Date(item.stamp).toDateString()}</div>
+                        <div className="text-sm text-gray-900">
+                          {new Date(item.stamp).toDateString()}
+                        </div>
                       </td>
                       <td className="px-3 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">

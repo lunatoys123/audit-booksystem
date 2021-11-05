@@ -2,25 +2,21 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLimit, fetchBooks, selectData, selectPage } from "../redux/user/Dataslice";
-const SearchTable = () => {
-  const [TableData, setTableData] = useState([]);
+const SearchTable = (props) => {
+  //const [TableData, setTableData] = useState([]);
   const dispatch = useDispatch();
-
-  const[Title, setTitle] = useState('');
-  const[Author, setAuthor] = useState('');
-  const[Publisher, setPublisher] = useState('');
-  const[Year, setYear] = useState('');
-  const[categories, setCategories] = useState('');
-  const[SecondCategories, setSecondCategories] = useState('');
 
   const limit = useSelector(selectLimit);
   const page = useSelector(selectPage);
+  const data = useSelector(selectData);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/AllBooks").then((response) => {
-      console.log(response);
-      setTableData(response.data);
-    });
+
+    dispatch(fetchBooks({page, limit ,...props}));
+    // axios.get("http://localhost:3001/AllBooks").then((response) => {
+    //   console.log(response);
+    //   setTableData(response.data);
+    // });
 
   }, []);
   return (
@@ -29,66 +25,66 @@ const SearchTable = () => {
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-500">
                 <tr>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     computer no
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     title
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     author
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     year
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     publisher
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     date
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     categories
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     second categories
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-3 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
                   >
                     status
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {TableData.map((item) => {
+                {data.map((item) => {
                   return (
                     <tr key={item.acc}>
                       <td className="px-3 py-4 whitespace-nowrap">

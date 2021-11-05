@@ -23,8 +23,6 @@ const Login = () => {
   const LoginUser = (e) => {
     e.preventDefault();
     dispatch(GetLoginName({ username, password }));
-
-    console.log(LoginState)
     // axios
     //   .get("http://localhost:3001/login", {
     //     params: { username, password },

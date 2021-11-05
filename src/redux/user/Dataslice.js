@@ -3,13 +3,12 @@ import axios from "axios";
 
 export const fetchBooks = createAsyncThunk("Book/fetchBook", async (props) => {
   const page = Number(props.page);
-  const limit = props.limit;
-  const title = props.title;
-  const author = props.author;
-  const response = await axios.get("http://localhost:3001/AllBooks", {
-    params: { page, limit, title, author },
-  });
+  const limit = Number(props.limit);
 
+  const response = await axios.get("http://localhost:3001/fetchBooks", {
+    params: { page, limit, ...props },
+  });
+  console.log(response);
   return response.data;
 });
 
@@ -23,7 +22,11 @@ export const DataSlice = createSlice({
     totalPage: 0,
   },
   reducers: {},
-  extraReducers(builder) {},
+  extraReducers(builder) {
+    builder.addCase(fetchBooks.fulfilled, (state, action) => {
+      return { ...state, data: action.payload };
+    });
+  },
 });
 
 export default DataSlice.reducer;

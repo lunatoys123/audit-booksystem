@@ -25,6 +25,10 @@ export const fetchTotalPage = createAsyncThunk(
   }
 );
 
+export const NextPage = createAsyncThunk("Book/fetchNextPage",async(props)=>{
+  
+})
+
 export const DataSlice = createSlice({
   name: "user",
   initialState: {

@@ -12,6 +12,19 @@ export const fetchBooks = createAsyncThunk("Book/fetchBook", async (props) => {
   return response.data;
 });
 
+export const fetchTotalPage = createAsyncThunk(
+  "Book/fetchTotalPage",
+  async (props) => {
+    const limit = Number(props.limit);
+
+    const response = await axios.get("http://localhost:3001/fetchTotalPage", {
+      params: { ...props },
+    });
+
+    return Math.ceil(Number(response.data.totalNumber) / limit);
+  }
+);
+
 export const DataSlice = createSlice({
   name: "user",
   initialState: {
@@ -25,6 +38,9 @@ export const DataSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
       return { ...state, data: action.payload };
+    });
+    builder.addCase(fetchTotalPage.fulfilled, (state, action) => {
+      return { ...state, totalPage: action.payload };
     });
   },
 });

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLimit, fetchBooks, selectData, selectPage } from "../redux/user/Dataslice";
+import {
+  selectLimit,
+  fetchBooks,
+  selectData,
+  selectPage,
+  fetchTotalPage,
+} from "../redux/user/Dataslice";
 const SearchTable = (props) => {
-  //const [TableData, setTableData] = useState([]);
   const dispatch = useDispatch();
 
   const limit = useSelector(selectLimit);
@@ -11,14 +15,9 @@ const SearchTable = (props) => {
   const data = useSelector(selectData);
 
   useEffect(() => {
-
-    dispatch(fetchBooks({page, limit ,...props}));
-    // axios.get("http://localhost:3001/AllBooks").then((response) => {
-    //   console.log(response);
-    //   setTableData(response.data);
-    // });
-
-  }, []);
+    dispatch(fetchBooks({ page, limit, ...props }));
+    dispatch(fetchTotalPage({ limit, ...props }));
+  }, [dispatch, page, limit, props]);
   return (
     <div className="flex flex-col w-11/12 mx-auto">
       <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -110,7 +109,11 @@ const SearchTable = (props) => {
                       </td>
                       <td className="px-3 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
-                          {new Date(item.stamp).toDateString()}
+                          {new Date(item.date).getDate() +
+                            "/" +
+                            (new Date(item.date).getMonth() + 1) +
+                            "/" +
+                            new Date(item.date).getFullYear()}
                         </div>
                       </td>
                       <td className="px-3 py-4 whitespace-nowrap">

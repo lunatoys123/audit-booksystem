@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../component/navbar";
 import SearchTable from "../component/SearchTable";
 import SearchForm from "../component/SearchForm";
-import Pagination from "../component/Pagination"
+import Pagination from "../component/Pagination";
 const Main = () => {
   const [Title, setTitle] = useState("");
   const [Author, setAuthor] = useState("");
@@ -30,7 +30,14 @@ const Main = () => {
         categories={categories}
         date={date}
       />
-      <Pagination />
+      <Pagination
+        Title={Title}
+        Author={Author}
+        Publisher={Publisher}
+        Year={Year}
+        categories={categories}
+        date={date}
+      />
     </>
   );
 };

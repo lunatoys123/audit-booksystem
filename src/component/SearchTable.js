@@ -17,7 +17,10 @@ const SearchTable = (props) => {
   useEffect(() => {
     dispatch(fetchBooks({ page, limit, ...props }));
     dispatch(fetchTotalPage({ limit, ...props }));
-  }, [dispatch, page, limit, props]);
+  }, [
+    , page, limit, props]);
+
+s
   return (
     <div className="flex flex-col w-11/12 mx-auto">
       <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

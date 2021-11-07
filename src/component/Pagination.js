@@ -3,9 +3,19 @@ import { useSelector } from "react-redux";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { selectPage, selectTotalPage } from "../redux/user/Dataslice";
 
-const Pagination = () => {
+const Pagination = (props) => {
   const page = useSelector(selectPage);
   const totalPage = useSelector(selectTotalPage);
+
+  const goToNextPage = () =>{
+    const title = props.Title;
+    const author = props.Author;
+    const publisher = props.Publisher;
+    const categories = props.categories;
+    const date = props.date;
+
+    
+  }
   return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">

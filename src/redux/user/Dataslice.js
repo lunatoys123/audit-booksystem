@@ -8,7 +8,7 @@ export const fetchBooks = createAsyncThunk("Book/fetchBook", async (props) => {
   const response = await axios.get("http://localhost:3001/fetchBooks", {
     params: { page, limit, ...props },
   });
-  console.log(response);
+
   return response.data;
 });
 
@@ -25,9 +25,46 @@ export const fetchTotalPage = createAsyncThunk(
   }
 );
 
-export const NextPage = createAsyncThunk("Book/fetchNextPage",async(props)=>{
-  
-})
+export const fetchNextPage = createAsyncThunk(
+  "Book/nextPage",
+  async (props) => {
+    const page = Number(props.page) + 1;
+    const limit = Number(props.limit);
+
+    const response = await axios.get("http://localhost:3001/fetchBooks", {
+      params: { page, limit, ...props },
+    });
+    return response.data;
+  }
+);
+
+export const previousPage = createAsyncThunk(
+  "Book/previousPage",
+  async (props) => {
+    const page = Number(props.page) - 1;
+    const limit = Number(props.limit);
+
+    const response = await axios.get("http://localhost:3001/fetchBooks", {
+      params: { page, limit, ...props },
+    });
+
+    return response.data;
+  }
+);
+
+export const fetchToCertainPage = createAsyncThunk(
+  "Book/fetchToCertainPage",
+  async (props) => {
+    const NextPage = Number(props.nextpage);
+    const limit = Number(props.limit);
+
+    const response = await axios.get("http://localhost:3001/fetchBooks",{
+      params:{ page: NextPage, limit, ...props}
+    })
+
+    return response.data;
+  }
+);
 
 export const DataSlice = createSlice({
   name: "user",
@@ -45,6 +82,12 @@ export const DataSlice = createSlice({
     });
     builder.addCase(fetchTotalPage.fulfilled, (state, action) => {
       return { ...state, totalPage: action.payload };
+    });
+    builder.addCase(fetchNextPage.fulfilled, (state, action) => {
+      return { ...state, page: state.page + 1, data: action.payload };
+    });
+    builder.addCase(previousPage.fulfilled, (state, action) => {
+      return { ...state, page: state.page - 1, data: action.payload };
     });
   },
 });

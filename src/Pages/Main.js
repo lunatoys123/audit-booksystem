@@ -14,30 +14,7 @@ const Main = () => {
   return (
     <>
       <Navbar />
-      <SearchForm
-        setTitle={setTitle}
-        setAuthor={setAuthor}
-        setPublisher={setPublisher}
-        setYear={setYear}
-        setCategories={setCategories}
-        setDate={setDate}
-      />
-      <SearchTable
-        Title={Title}
-        Author={Author}
-        Publisher={Publisher}
-        Year={Year}
-        categories={categories}
-        date={date}
-      />
-      <Pagination
-        Title={Title}
-        Author={Author}
-        Publisher={Publisher}
-        Year={Year}
-        categories={categories}
-        date={date}
-      />
+      <SearchTable />
     </>
   );
 };

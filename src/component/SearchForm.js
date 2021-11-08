@@ -29,13 +29,11 @@ const SearchForm = ({
     setAuthor(author);
     setPublisher(publisher);
     if (categories === "Select All") {
-      setCategories('');
+      setCategories("");
     } else {
       setCategories(categories);
     }
     setDate(date);
-
-   
   };
   return (
     <div className="flex w-11/12 mx-auto m-2 items-center justify-center">

@@ -21,13 +21,13 @@ const App = () => {
         >
           <Login />
         </UserLogin>
-        <ProtectedRoutes
+        {/* <ProtectedRoutes
           loggedInName={LoginName}
           path={ROUTES.MainPagePath}
           exact
-        >
+        > */}
           <Main />
-        </ProtectedRoutes>
+        {/* </ProtectedRoutes> */}
       </Switch>
     </Router>
   );

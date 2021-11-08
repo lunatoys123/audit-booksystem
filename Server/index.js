@@ -32,6 +32,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/fetchBooks", (req, res) => {
+  console.log(req.query);
   const page = Number(req.query.page);
   const limit = Number(req.query.limit);
   const Title = req.query.Title;
@@ -134,4 +135,10 @@ app.get("/fetchTotalPage", (req, res)=>{
     }
   })
 
+});
+
+
+app.listen(3001, ()=>{
+  console.log("listen to port 3001");
+  console.log("set up database: "+db);
 })

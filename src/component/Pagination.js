@@ -1,7 +1,11 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
-import { fetchNextPage, previousPage } from "../redux/user/Dataslice";
+import {
+  fetchNextPage,
+  previousPage,
+  fetchToCertainPage,
+} from "../redux/user/Dataslice";
 
 const Pagination = (props) => {
   const dispatch = useDispatch();
@@ -115,21 +119,41 @@ const Pagination = (props) => {
       );
   };
 
-  const GoToCertainPage = (event) =>{
+  const GoToCertainPage = (event) => {
+    const Title = props.Title;
+    const Author = props.Author;
+    const Publisher = props.Publisher;
+    const categories = props.categories;
+    const date = props.date;
+    const Year = props.Year;
+
+    
     styleCleanUp(elements);
-    const targetPage = Number(event.target.innderHTML());
-    if(targetPage >= 3){
+    const targetPage = Number(event.target.innerHTML);
+
+    if (targetPage >= 3) {
       centerButtonOperation();
-    }else{
+    } else {
       event.target.classList.add("text-indigo-600");
       event.target.classList.remove("border-gray-300");
       event.target.classList.add("bg-indigo-50");
     }
 
-    if(targetPage <= totalPage){
-      
+    if (targetPage <= totalPage) {
+      dispatch(
+        fetchToCertainPage({
+          nextpage: targetPage,
+          limit,
+          Title,
+          Author,
+          Publisher,
+          categories,
+          date,
+          Year,
+        })
+      );
     }
-  }
+  };
   return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">
@@ -157,12 +181,14 @@ const Pagination = (props) => {
               type="button"
               aria-current="page"
               className="z-10 bg-indigo-50 text-indigo-600 relative border-gray-300 inline-flex items-center px-4 py-2 border text-sm font-medium"
+              onClick={(event) => GoToCertainPage(event)}
             >
               {page < 3 ? 1 : page - 2}
             </button>
             <button
               type="button"
               className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+              onClick={(event) => GoToCertainPage(event)}
             >
               {page < 3 ? 2 : page - 1}
             </button>
@@ -170,21 +196,32 @@ const Pagination = (props) => {
               type="button"
               className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
               ref={centerButton}
+              onClick={(event) => GoToCertainPage(event)}
             >
               {page < 3 ? 3 : page}
             </button>
 
             <button
               type="button"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-              // disabled={page + 1 > totalPage ? true : false}
+              disabled={page + 1 > totalPage ? true : false}
+              className={`${
+                page + 1 <= totalPage
+                  ? `bg-white hover:bg-gray-50 text-gray-500 border-gray-300   hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium`
+                  : `hidden `
+              } `}
+              onClick={(event)=>GoToCertainPage(event)}
             >
               {page < 3 ? 4 : page + 1}
             </button>
             <button
               type="button"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-              // disabled={page + 2 > totalPage ? true : false}
+              className={`${
+                page + 2 <= totalPage
+                  ? `bg-white hover:bg-gray-50 text-gray-500 border-gray-300   hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium`
+                  : `hidden `
+              } `}
+              disabled={page + 2 > totalPage ? true : false}
+              onClick={(event) => GoToCertainPage(event)}
             >
               {page < 3 ? 5 : page + 2}
             </button>

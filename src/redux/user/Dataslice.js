@@ -58,13 +58,15 @@ export const fetchToCertainPage = createAsyncThunk(
     const NextPage = Number(props.nextpage);
     const limit = Number(props.limit);
 
-    const response = await axios.get("http://localhost:3001/fetchBooks",{
-      params:{ page: NextPage, limit, ...props}
-    })
+    const response = await axios.get("http://localhost:3001/fetchBooks", {
+      params: { page: NextPage, limit, ...props },
+    });
 
-    return response.data;
+    return { page: NextPage, data: response.data };
   }
 );
+
+export const searchBook = createAsyncThunk("")
 
 export const DataSlice = createSlice({
   name: "user",
@@ -88,6 +90,9 @@ export const DataSlice = createSlice({
     });
     builder.addCase(previousPage.fulfilled, (state, action) => {
       return { ...state, page: state.page - 1, data: action.payload };
+    });
+    builder.addCase(fetchToCertainPage.fulfilled, (state, action) => {
+      return { ...state, page: action.payload.page, data: action.payload.data };
     });
   },
 });

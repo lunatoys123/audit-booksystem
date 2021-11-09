@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategories, selectCategories } from "../redux/user/FormSlice";
-import { selectPage, fetchTotalPage } from "../redux/user/Dataslice";
+import { selectPage } from "../redux/user/Dataslice";
 
 const SearchForm = ({
   setTitle,
@@ -16,7 +16,7 @@ const SearchForm = ({
   useEffect(() => {
     //get all categories
     dispatch(fetchCategories());
-  }, []);
+  }, [dispatch]);
 
   const SubmitForm = (event) => {
     event.preventDefault();

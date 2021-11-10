@@ -74,7 +74,7 @@ export const searchBook = createAsyncThunk("Book/SearchBook", async (props) => {
     params: { page, limit, ...props },
   });
 
-  return response.data;
+  return { limit, data: response.data };
 });
 
 export const DataSlice = createSlice({
@@ -104,7 +104,7 @@ export const DataSlice = createSlice({
       return { ...state, page: action.payload.page, data: action.payload.data };
     });
     builder.addCase(searchBook.fulfilled, (state, action) => {
-      return { ...state, page: 1, data: action.payload };
+      return { ...state, page: 1, limit:action.payload.limit, data: action.payload.data };
     });
   },
 });

@@ -6,7 +6,7 @@ import {
   selectData,
   selectPage,
   fetchTotalPage,
-  selectTotalPage
+  selectTotalPage,
 } from "../redux/user/Dataslice";
 import Pagination from "./Pagination";
 import SearchForm from "./SearchForm";
@@ -24,6 +24,7 @@ const SearchTable = () => {
   const [Year, setYear] = useState("");
   const [categories, setCategories] = useState("");
   const [date, setDate] = useState("");
+  const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
     dispatch(
@@ -60,6 +61,8 @@ const SearchTable = () => {
         setYear={setYear}
         setCategories={setCategories}
         setDate={setDate}
+        limit={limit}
+        setSubmit={setSubmit}
       />
       <div className="flex flex-col w-11/12 mx-auto">
         <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -195,7 +198,9 @@ const SearchTable = () => {
         date={date}
         limit={limit}
         page={page}
-        totalPage = {totalPage}
+        totalPage={totalPage}
+        setSubmit={setSubmit}
+        submit={submit}
       />
     </>
   );

@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategories, selectCategories } from "../redux/user/FormSlice";
-import { selectPage } from "../redux/user/Dataslice";
+import { searchBook, fetchTotalPage } from "../redux/user/Dataslice";
 
 const SearchForm = ({
   setTitle,
   setAuthor,
   setPublisher,
   setCategories,
+  setYear,
   setDate,
+  limit,
+  setSubmit,
 }) => {
-  const page = useSelector(selectPage);
   const dispatch = useDispatch();
   const Categories = useSelector(selectCategories);
   useEffect(() => {
@@ -20,23 +22,64 @@ const SearchForm = ({
 
   const SubmitForm = (event) => {
     event.preventDefault();
-    const title = event.target.Title.value;
-    const author = event.target.Author.value;
-    const publisher = event.target.Publisher.value;
+    const Title = event.target.Title.value;
+    const Author = event.target.Author.value;
+    const Publisher = event.target.Publisher.value;
     const categories = event.target.categories.value;
     const date = event.target.date.value;
-    setTitle(title);
-    setAuthor(author);
-    setPublisher(publisher);
+    const Year = event.target.Year.value;
+
+    setTitle(Title);
+    setAuthor(Author);
+    setPublisher(Publisher);
+    setYear(Year);
+    setDate(date);
+
     if (categories === "Select All") {
+      dispatch(
+        searchBook({
+          limit,
+          Title,
+          Author,
+          Publisher,
+          categories: "",
+          date,
+          Year,
+        })
+      );
+      dispatch(
+        fetchTotalPage({
+          limit,
+          Title,
+          Author,
+          Publisher,
+          Year,
+          categories: "",
+          date,
+        })
+      );
       setCategories("");
     } else {
       setCategories(categories);
+      dispatch(
+        searchBook({ limit, Title, Author, Publisher, categories, date, Year })
+      );
+      dispatch(
+        fetchTotalPage({
+          limit,
+          Title,
+          Author,
+          Publisher,
+          Year,
+          categories,
+          date,
+        })
+      );
     }
-    setDate(date);
+    setSubmit(true);
   };
   return (
-    <div className="flex w-11/12 mx-auto m-2 items-center justify-center">
+    <div className="flex w-11/12 mx-auto m-2 items-center justify-center divide-y divide-gray-300">
       <form onSubmit={SubmitForm}>
         <div className="flex flex-wrap">
           <div className="flex flex-col m-2">
@@ -55,6 +98,7 @@ const SearchForm = ({
               className="border border-gray-300 rounded-md p-1"
               placeholder="Enter Author"
               name="Author"
+              autoComplete="off"
             />
           </div>
           <div className="flex flex-col m-2">
@@ -64,6 +108,18 @@ const SearchForm = ({
               className="border border-gray-300 rounded-md p-1"
               placeholder="Enter Publisher"
               name="Publisher"
+              autoComplete="off"
+            />
+          </div>
+          <div className="flex flex-col m-2">
+            <label className="text-md text-gray-500 font-bold">Year</label>
+            <input
+              type="number"
+              min="1948"
+              max={new Date().getFullYear()}
+              className="border border-gray-300 p-1 rounded-md w-40"
+              placeholder="Select Year"
+              name="Year"
             />
           </div>
           <div className="flex flex-col m-2">
@@ -71,7 +127,7 @@ const SearchForm = ({
               Categories
             </label>
             <select
-              className="border border-gray-300 rounded-md p-1 max-w-max"
+              className="border border-gray-300 rounded-md p-1 max-w-full"
               name="categories"
             >
               <option value="Select All">Select All</option>
@@ -82,7 +138,7 @@ const SearchForm = ({
                     value={item.categories}
                     className="text-sm"
                   >
-                    {item.categories}({item.catedesc})
+                    {item.categories}
                   </option>
                 );
               })}

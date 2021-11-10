@@ -66,7 +66,16 @@ export const fetchToCertainPage = createAsyncThunk(
   }
 );
 
-export const searchBook = createAsyncThunk("")
+export const searchBook = createAsyncThunk("Book/SearchBook", async (props) => {
+  const page = 1;
+  const limit = Number(props.limit);
+
+  const response = await axios.get("http://localhost:3001/fetchBooks", {
+    params: { page, limit, ...props },
+  });
+
+  return response.data;
+});
 
 export const DataSlice = createSlice({
   name: "user",
@@ -93,6 +102,9 @@ export const DataSlice = createSlice({
     });
     builder.addCase(fetchToCertainPage.fulfilled, (state, action) => {
       return { ...state, page: action.payload.page, data: action.payload.data };
+    });
+    builder.addCase(searchBook.fulfilled, (state, action) => {
+      return { ...state, page: 1, data: action.payload };
     });
   },
 });

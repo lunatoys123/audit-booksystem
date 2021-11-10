@@ -48,7 +48,7 @@ app.get("/fetchBooks", (req, res) => {
     "select acc, title, author, year, publisher, date, categories, scategories, bstatus from bookmaster where 1=1 ";
 
   if (Title !== "") {
-    query += " and title like '%" + Title + "'% ";
+    query += " and title like '%" + Title + "%' ";
   }
 
   if (Author !== "") {
@@ -60,7 +60,7 @@ app.get("/fetchBooks", (req, res) => {
   }
 
   if (Year !== "") {
-    query += " and year like '%" + Year + "%' ";
+    query += " and year >= " + Year + " ";
   }
 
   if (categories !== "") {
@@ -68,10 +68,11 @@ app.get("/fetchBooks", (req, res) => {
   }
 
   if (date !== "") {
-    query += " and date like '%" + date + "%' ";
+    query += " and date >= " + date + " ";
   }
 
   query += "limit ?,?";
+  console.log(query);
   db.query(query, [start_of, limit], (err, result) => {
     if (err) {
       console.log(err);
@@ -81,18 +82,17 @@ app.get("/fetchBooks", (req, res) => {
   });
 });
 
-app.get("/fetchCategories",(req, res)=>{
-  db.query("select * from classification",(err, result)=>{
-    if(err){
+app.get("/fetchCategories", (req, res) => {
+  db.query("select * from classification", (err, result) => {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       res.send(result);
     }
-  })
+  });
 });
 
-
-app.get("/fetchTotalPage", (req, res)=>{
+app.get("/fetchTotalPage", (req, res) => {
   const Title = req.query.Title;
   const Author = req.query.Author;
   const Publisher = req.query.Publisher;
@@ -100,11 +100,10 @@ app.get("/fetchTotalPage", (req, res)=>{
   const categories = req.query.categories;
   const date = req.query.date;
 
-  query = "select count(*) as totalNumber from bookmaster where 1=1 "
+  query = "select count(*) as totalNumber from bookmaster where 1=1 ";
 
-  
   if (Title !== "") {
-    query += " and title like '%" + Title + "'% ";
+    query += " and title like '%" + Title + "%' ";
   }
 
   if (Author !== "") {
@@ -116,7 +115,7 @@ app.get("/fetchTotalPage", (req, res)=>{
   }
 
   if (Year !== "") {
-    query += " and year like '%" + Year + "%' ";
+    query += " and year >= " + Year + " ";
   }
 
   if (categories !== "") {
@@ -124,21 +123,19 @@ app.get("/fetchTotalPage", (req, res)=>{
   }
 
   if (date !== "") {
-    query += " and date like '%" + date + "%' ";
+    query += " and date >= " + date + " ";
   }
 
-  db.query(query, (err, result)=>{
-    if(err){
+  db.query(query, (err, result) => {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       res.send(...result);
     }
-  })
-
+  });
 });
 
-
-app.listen(3001, ()=>{
+app.listen(3001, () => {
   console.log("listen to port 3001");
-  console.log("set up database: "+db);
-})
+  console.log("set up database: " + db);
+});

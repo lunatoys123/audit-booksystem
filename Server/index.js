@@ -135,6 +135,95 @@ app.get("/fetchTotalPage", (req, res) => {
   });
 });
 
+app.get("/getUser", (_req, res) => {
+  db.query("select * from user", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.delete("/deleteUser", (req, res) => {
+  const userId = req.body.Userid;
+
+  db.query("delete from user where uid = ?", [userId], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.get("/getUserNameAndPassword", (req, res) => {
+  const UserId = req.query.userId;
+
+  db.query(
+    "Select uname as username, upassword as userpassword from user where uid = ?",
+    [UserId],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(...result);
+      }
+    }
+  );
+});
+
+app.get("/checkUserExist", (req, res) => {
+  const username = req.query.username;
+
+  db.query(
+    "select count(*) as number from user where uname = ?",
+    [username],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(...result);
+      }
+    }
+  );
+});
+
+app.post("/addUser", (req, res) => {
+  const username = req.body.username;
+  const userpassword = req.body.userpassword;
+
+  db.query(
+    "insert into user values(null,?,?,'Y','N')",
+    [username, userpassword],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.put("/updateUser", (req, res) => {
+  const userId = req.body.userId;
+  const username = req.body.username;
+  const password = req.body.userpassword;
+
+  db.query(
+    "update user set uname = ? , upassword = ? where uid = ?",
+    [username, password, userId],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 app.listen(3001, () => {
   console.log("listen to port 3001");
   console.log("set up database: " + db);

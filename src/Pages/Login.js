@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as ROUTES from "../constant";
 import ErrorMessage from "../component/ErrorMessage";
-import { GetLoginName, selectLoginState } from "../redux/user/userslice";
+import { GetLoginName, selectLoginState } from "../redux/user/LoginSlice";
 import { useDispatch, useSelector } from "react-redux";
 const Login = () => {
   const history = useHistory();

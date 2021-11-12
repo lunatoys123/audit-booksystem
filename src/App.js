@@ -1,7 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Main from "./Pages/Main";
 import Login from "./Pages/Login";
+import Admin from "./Pages/Admin";
 import UserLogin from "./helper/user_login";
 import * as ROUTES from "./constant";
 import ProtectedRoutes from "./helper/ProtectedRoutes";
@@ -28,6 +29,7 @@ const App = () => {
         >
           <Main />
         </ProtectedRoutes>
+        <Route exact path={ROUTES.AdminPagePath} component={Admin} />
       </Switch>
     </Router>
   );

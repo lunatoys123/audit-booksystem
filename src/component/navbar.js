@@ -2,7 +2,7 @@ import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useSelector } from "react-redux";
-import { selectLoginName } from "../redux/user/userslice";
+import { selectLoginName } from "../redux/user/LoginSlice";
 
 const Navbar = () => {
   const LoginName = useSelector(selectLoginName);

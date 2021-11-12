@@ -1,10 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit'
-import userslice from '../user/userslice'
+import LoginSlice from '../user/LoginSlice'
 import Dataslice from '../user/Dataslice'
 import FormSlice from '../user/FormSlice'
 export default configureStore({
     reducer:{
-        user: userslice,
+        Login: LoginSlice,
         data: Dataslice,
         Form: FormSlice,
 

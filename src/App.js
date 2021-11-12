@@ -6,7 +6,7 @@ import UserLogin from "./helper/user_login";
 import * as ROUTES from "./constant";
 import ProtectedRoutes from "./helper/ProtectedRoutes";
 import { useSelector } from "react-redux";
-import { selectLoginName } from "./redux/user/userslice";
+import { selectLoginName } from "./redux/user/LoginSlice";
 const App = () => {
   const LoginName = useSelector(selectLoginName);
 

@@ -37,7 +37,8 @@ const Admin = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col w-11/12 mx-auto">
+      <div className="flex flex-col w-11/12 mx-auto mt-3">
+        <h1 className="text-center font-semibold text-red-800 text-3xl">Admin</h1>
         <div className="flex items-end justify-end">
           <button
             className="border text-center text-md w-14 bg-indigo-400 rounded-sm text-white border-gray-300 hover:bg-opacity-60"

@@ -11,6 +11,7 @@ import {
 import Pagination from "./Pagination";
 import SearchForm from "./SearchForm";
 const SearchTable = () => {
+
   const dispatch = useDispatch();
 
   const limit = useSelector(selectLimit);
@@ -136,7 +137,7 @@ const SearchTable = () => {
                             {item.acc}
                           </div>
                         </td>
-                        <td className="px-3 py-4 overflow-clip">
+                        <td className="px-3 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900">
                             {item.title}
                           </div>

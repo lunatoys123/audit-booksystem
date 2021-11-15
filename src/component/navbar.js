@@ -1,11 +1,9 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { useSelector } from "react-redux";
-import { selectLoginName } from "../redux/user/LoginSlice";
 
 const Navbar = () => {
-  const LoginName = useSelector(selectLoginName);
+  const LoginName = localStorage.getItem('LoginUser');
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

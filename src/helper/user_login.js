@@ -1,12 +1,11 @@
 import { Route, Redirect } from "react-router-dom";
 
 export default function IsUserLoggedin({
-  loggedInName,
   loggedInPath,
   children,
   ...rest
 }) {
-
+  const loggedInName = localStorage.getItem('LoginUser');
   return (
     <Route
       {...rest}

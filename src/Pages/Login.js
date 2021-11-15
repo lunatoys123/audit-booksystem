@@ -1,43 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as ROUTES from "../constant";
 import ErrorMessage from "../component/ErrorMessage";
-import { GetLoginName, selectLoginState } from "../redux/user/LoginSlice";
-import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 const Login = () => {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const dispatch = useDispatch();
-  const LoginState = useSelector(selectLoginState);
-
-  useEffect(()=>{
-    if(LoginState==='failed'){
-      setError((error)=>error='Wrong username or password');
-    }else if(LoginState==='Success'){
-      history.push(ROUTES.MainPagePath);
-    }
-  },[LoginState, history]);
   const LoginUser = (e) => {
     e.preventDefault();
-    dispatch(GetLoginName({ username, password }));
-    // axios
-    //   .get("http://localhost:3001/login", {
-    //     params: { username, password },
-    //   })
-    //   .then((response) => {
-    //     if (response.data.num > 0) {
-    //       localStorage.setItem("LoginUser", response.data.uname);
-    //       history.push(ROUTES.MainPagePath);
-    //     } else {
-    //       setError("Wrong username or password");
-    //     }
-    //   })
-    //   .catch((response) => {
-    //     console.log(response);
-    //   });
+    axios
+      .get("http://localhost:3001/login", {
+        params: { username, password },
+      })
+      .then((response) => {
+        if (response.data.uname) {
+          localStorage.setItem("LoginUser", response.data.uname);
+          history.push(ROUTES.MainPagePath);
+        } else {
+          setError("Wrong username or password");
+        }
+      })
+      .catch((response) => {
+        console.log(response);
+      });
   };
   return (
     <div className="bg-white w-screen h-screen flex flex-col">

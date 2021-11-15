@@ -6,30 +6,24 @@ import Admin from "./Pages/Admin";
 import UserLogin from "./helper/user_login";
 import * as ROUTES from "./constant";
 import ProtectedRoutes from "./helper/ProtectedRoutes";
-import { useSelector } from "react-redux";
-import { selectLoginName } from "./redux/user/LoginSlice";
 const App = () => {
-  const LoginName = useSelector(selectLoginName);
 
   return (
     <Router>
       <Switch>
         <UserLogin
-          loggedInName={LoginName}
           loggedInPath={ROUTES.MainPagePath}
           path={ROUTES.LoginPagePath}
           exact
         >
           <Login />
         </UserLogin>
-        <ProtectedRoutes
-          loggedInName={LoginName}
-          path={ROUTES.MainPagePath}
-          exact
-        >
+        <ProtectedRoutes path={ROUTES.MainPagePath} exact>
           <Main />
         </ProtectedRoutes>
-        <Route exact path={ROUTES.AdminPagePath} component={Admin} />
+        <ProtectedRoutes path={ROUTES.AdminPagePath} exact>
+          <Admin />
+        </ProtectedRoutes>
       </Switch>
     </Router>
   );

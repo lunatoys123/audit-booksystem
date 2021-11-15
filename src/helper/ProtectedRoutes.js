@@ -1,11 +1,10 @@
 import { Route, Redirect } from "react-router-dom";
 import * as ROUTES from '../constant'
 export default function ProtectedRoutes({
-  loggedInName,
   children,
   ...rest
 }) {
-  
+  const loggedInName = localStorage.getItem('LoginUser')
   return (
     <Route
       {...rest}

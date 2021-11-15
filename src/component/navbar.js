@@ -1,9 +1,17 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { useHistory } from "react-router-dom";
+import * as ROUTES from "../constant";
 
 const Navbar = () => {
-  const LoginName = localStorage.getItem('LoginUser');
+  const history = useHistory();
+  const LoginName = localStorage.getItem("LoginUser");
+
+  const GoToAdminPage = () => {
+    console.log("GO To Admin Page");
+    history.push(ROUTES.AdminPagePath);
+  };
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -30,6 +38,7 @@ const Navbar = () => {
                     <button
                       className=" hover:bg-gray-700 text-white
                           px-3 py-2 rounded-md text-sm font-medium"
+                      
                     >
                       Admin
                     </button>
@@ -50,8 +59,9 @@ const Navbar = () => {
           <Disclosure.Panel className="sm:hidden">
             <div className="flex flex-col px-2 pt-2 pb-3 space-y-1">
               <Disclosure.Button
-                as="a"
+                as="button"
                 className="bg-gray-900 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => GoToAdminPage()}
               >
                 Admin
               </Disclosure.Button>

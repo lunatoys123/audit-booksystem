@@ -11,7 +11,6 @@ import {
 import Pagination from "./Pagination";
 import SearchForm from "./SearchForm";
 const SearchTable = () => {
-
   const dispatch = useDispatch();
 
   const limit = useSelector(selectLimit);
@@ -19,6 +18,7 @@ const SearchTable = () => {
   const data = useSelector(selectData);
   const totalPage = useSelector(selectTotalPage);
 
+  const [computerNo, setComputerNo] = useState("");
   const [Title, setTitle] = useState("");
   const [Author, setAuthor] = useState("");
   const [Publisher, setPublisher] = useState("");
@@ -30,6 +30,7 @@ const SearchTable = () => {
   useEffect(() => {
     dispatch(
       fetchBooks({
+        computerNo,
         page,
         limit,
         Title,
@@ -42,6 +43,7 @@ const SearchTable = () => {
     );
     dispatch(
       fetchTotalPage({
+        computerNo,
         limit,
         Title,
         Author,
@@ -51,7 +53,18 @@ const SearchTable = () => {
         date,
       })
     );
-  }, [dispatch, page, limit, Title, Author, Publisher, Year, categories, date]);
+  }, [
+    dispatch,
+    page,
+    limit,
+    Title,
+    Author,
+    Publisher,
+    Year,
+    categories,
+    date,
+    computerNo,
+  ]);
 
   return (
     <>
@@ -64,6 +77,7 @@ const SearchTable = () => {
         setDate={setDate}
         limit={limit}
         setSubmit={setSubmit}
+        setComputerNo={setComputerNo}
       />
       <div className="flex flex-col w-11/12 mx-auto">
         <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 h-96 overflow-y-scroll">
@@ -191,6 +205,7 @@ const SearchTable = () => {
         </div>
       </div>
       <Pagination
+        computerNo={computerNo}
         Title={Title}
         Author={Author}
         Publisher={Publisher}

@@ -9,7 +9,6 @@ const Navbar = () => {
   const LoginName = localStorage.getItem("LoginUser");
 
   const GoToAdminPage = () => {
-    console.log("GO To Admin Page");
     history.push(ROUTES.AdminPagePath);
   };
   return (
@@ -38,7 +37,7 @@ const Navbar = () => {
                     <button
                       className=" hover:bg-gray-700 text-white
                           px-3 py-2 rounded-md text-sm font-medium"
-                      
+                          onClick={() => GoToAdminPage()}
                     >
                       Admin
                     </button>
@@ -61,7 +60,7 @@ const Navbar = () => {
               <Disclosure.Button
                 as="button"
                 className="bg-gray-900 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                onClick={() => GoToAdminPage()}
+                
               >
                 Admin
               </Disclosure.Button>

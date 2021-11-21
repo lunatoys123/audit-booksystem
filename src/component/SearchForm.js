@@ -12,6 +12,7 @@ const SearchForm = ({
   setDate,
   limit,
   setSubmit,
+  setComputerNo,
 }) => {
   const dispatch = useDispatch();
   const Categories = useSelector(selectCategories);
@@ -22,6 +23,7 @@ const SearchForm = ({
 
   const SubmitForm = (event) => {
     event.preventDefault();
+    const ComputerNo = event.target.ComputerNo.value;
     const Title = event.target.Title.value;
     const Author = event.target.Author.value;
     const Publisher = event.target.Publisher.value;
@@ -29,6 +31,7 @@ const SearchForm = ({
     const date = event.target.date.value;
     const Year = event.target.Year.value;
 
+    setComputerNo(ComputerNo);
     setTitle(Title);
     setAuthor(Author);
     setPublisher(Publisher);
@@ -38,6 +41,7 @@ const SearchForm = ({
     if (categories === "Select All") {
       dispatch(
         searchBook({
+          ComputerNo,
           limit,
           Title,
           Author,
@@ -49,6 +53,7 @@ const SearchForm = ({
       );
       dispatch(
         fetchTotalPage({
+          ComputerNo,
           limit,
           Title,
           Author,
@@ -62,10 +67,20 @@ const SearchForm = ({
     } else {
       setCategories(categories);
       dispatch(
-        searchBook({ limit, Title, Author, Publisher, categories, date, Year })
+        searchBook({
+          ComputerNo,
+          limit,
+          Title,
+          Author,
+          Publisher,
+          categories,
+          date,
+          Year,
+        })
       );
       dispatch(
         fetchTotalPage({
+          ComputerNo,
           limit,
           Title,
           Author,
@@ -82,6 +97,17 @@ const SearchForm = ({
     <div className="flex w-11/12 mx-auto m-2 items-center justify-center divide-y divide-gray-300">
       <form onSubmit={SubmitForm}>
         <div className="flex flex-wrap">
+          <div className="flex flex-col m-2">
+            <label className="text-md text-gray-500 font-bold">
+              Computer No
+            </label>
+            <input
+              type="number"
+              className="border border-gray-300 rounded-md p-1"
+              placeholder="Enter Computer No"
+              name="ComputerNo"
+            />
+          </div>
           <div className="flex flex-col m-2">
             <label className="text-md text-gray-500 font-bold">Title</label>
             <input

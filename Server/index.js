@@ -33,6 +33,7 @@ app.get("/login", (req, res) => {
 
 app.get("/fetchBooks", (req, res) => {
   console.log(req.query);
+  const computerNo = req.query.computerNo;
   const page = Number(req.query.page);
   const limit = Number(req.query.limit);
   const Title = req.query.Title;
@@ -47,6 +48,9 @@ app.get("/fetchBooks", (req, res) => {
   let query =
     "select acc, title, author, year, publisher, date, categories, scategories, bstatus from bookmaster where 1=1 ";
 
+  if (computerNo !== "") {
+    query += " and acc = " + computerNo+" ";
+  }
   if (Title !== "") {
     query += " and title like '%" + Title + "%' ";
   }
@@ -93,6 +97,7 @@ app.get("/fetchCategories", (req, res) => {
 });
 
 app.get("/fetchTotalPage", (req, res) => {
+  const computerNo = req.query.computerNo;
   const Title = req.query.Title;
   const Author = req.query.Author;
   const Publisher = req.query.Publisher;
@@ -101,6 +106,10 @@ app.get("/fetchTotalPage", (req, res) => {
   const date = req.query.date;
 
   query = "select count(*) as totalNumber from bookmaster where 1=1 ";
+
+  if (computerNo !== "") {
+    query += " and acc = " + computerNo+" ";
+  }
 
   if (Title !== "") {
     query += " and title like '%" + Title + "%' ";

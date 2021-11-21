@@ -5,7 +5,7 @@ import {
   fetchNextPage,
   previousPage,
   fetchToCertainPage,
-  searchBook
+  searchBook,
 } from "../redux/user/Dataslice";
 
 const Pagination = (props) => {
@@ -44,6 +44,7 @@ const Pagination = (props) => {
   };
 
   const goToNextPage = () => {
+    const computerNo = props.computerNo;
     const Title = props.Title;
     const Author = props.Author;
     const Publisher = props.Publisher;
@@ -54,6 +55,7 @@ const Pagination = (props) => {
     if (page < totalPage) {
       dispatch(
         fetchNextPage({
+          computerNo,
           page,
           limit,
           Title,
@@ -68,6 +70,7 @@ const Pagination = (props) => {
   };
 
   const goToPreviousPage = () => {
+    const computerNo = props.computerNo;
     const Title = props.Title;
     const Author = props.Author;
     const Publisher = props.Publisher;
@@ -78,6 +81,7 @@ const Pagination = (props) => {
     if (page > 1)
       dispatch(
         previousPage({
+          computerNo,
           page,
           limit,
           Title,
@@ -91,6 +95,7 @@ const Pagination = (props) => {
   };
 
   const GoToCertainPage = (event) => {
+    const computerNo = props.computerNo;
     const Title = props.Title;
     const Author = props.Author;
     const Publisher = props.Publisher;
@@ -103,6 +108,7 @@ const Pagination = (props) => {
     if (targetPage <= totalPage) {
       dispatch(
         fetchToCertainPage({
+          computerNo,
           nextpage: targetPage,
           limit,
           Title,
@@ -116,8 +122,9 @@ const Pagination = (props) => {
     }
   };
 
-  const ChangeOffset = (event) =>{
+  const ChangeOffset = (event) => {
     const limit = event.target.value;
+    const computerNo = props.computerNo
     const Title = props.Title;
     const Author = props.Author;
     const Publisher = props.Publisher;
@@ -125,8 +132,10 @@ const Pagination = (props) => {
     const date = props.date;
     const Year = props.Year;
 
-    dispatch(searchBook({limit, Title, Author, Publisher, categories, date, Year}));
-  }
+    dispatch(
+      searchBook({computerNo, limit, Title, Author, Publisher, categories, date, Year })
+    );
+  };
   return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 w-full mx-auto">
       <div className="flex-1 flex justify-between sm:hidden">
@@ -144,7 +153,10 @@ const Pagination = (props) => {
             aria-label="Pagination"
           >
             <div className="flex items-center justify-center pr-2">
-              <select className="border border-gray-300 p-2 rounded-md" onChange={(event)=>ChangeOffset(event)}>
+              <select
+                className="border border-gray-300 p-2 rounded-md"
+                onChange={(event) => ChangeOffset(event)}
+              >
                 <option value="5"> 5 records per page</option>
                 <option value="10"> 10 records per page</option>
                 <option value="50"> 50 records per page</option>

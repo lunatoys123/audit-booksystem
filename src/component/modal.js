@@ -47,18 +47,6 @@ const Modal = ({ open, setOpen, action, userId }) => {
     }
   }, [open, action, userId, dispatch, userNameToupdate, userPasswordToupdate]);
 
-  useEffect(() => {
-    if (action === "Edit") {
-      axios
-        .get("http://localhost:3001/getUserNameAndPassword", {
-          params: { userId },
-        })
-        .then((response) => {
-          setUserName(response.data.username);
-          setUserpassword(response.data.userpassword);
-        });
-    }
-  }, [action, userId]);
 
   const UserOperation = async () => {
     let check = new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");

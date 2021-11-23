@@ -11,6 +11,10 @@ const Navbar = () => {
   const GoToAdminPage = () => {
     history.push(ROUTES.AdminPagePath);
   };
+
+  const GoToHomePage = () => {
+    history.push(ROUTES.MainPagePath);
+  };
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -28,16 +32,19 @@ const Navbar = () => {
               </div>
               <div className="flex-1 items-center sm:items-stretch sm:justify-start h-10 sm:flex hidden">
                 <div className="flex-shrink-0 flex items-center ">
-                  <h1 className="text-white font-medium sm:block hidden">
+                  <button
+                    className="text-white font-medium sm:block hidden"
+                    onClick={() => GoToHomePage()}
+                  >
                     Audit Commission Library System
-                  </h1>
+                  </button>
                 </div>
                 <div className="hidden sm:flex sm:ml-6 items-center justify-center">
                   <div className="flex space-x-4">
                     <button
                       className=" hover:bg-gray-700 text-white
                           px-3 py-2 rounded-md text-sm font-medium"
-                          onClick={() => GoToAdminPage()}
+                      onClick={() => GoToAdminPage()}
                     >
                       Admin
                     </button>
@@ -60,7 +67,6 @@ const Navbar = () => {
               <Disclosure.Button
                 as="button"
                 className="bg-gray-900 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                
               >
                 Admin
               </Disclosure.Button>

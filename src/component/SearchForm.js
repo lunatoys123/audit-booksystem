@@ -23,7 +23,7 @@ const SearchForm = ({
 
   const SubmitForm = (event) => {
     event.preventDefault();
-    const ComputerNo = event.target.ComputerNo.value;
+    const computerNo = event.target.ComputerNo.value;
     const Title = event.target.Title.value;
     const Author = event.target.Author.value;
     const Publisher = event.target.Publisher.value;
@@ -31,7 +31,7 @@ const SearchForm = ({
     const date = event.target.date.value;
     const Year = event.target.Year.value;
 
-    setComputerNo(ComputerNo);
+    setComputerNo(computerNo);
     setTitle(Title);
     setAuthor(Author);
     setPublisher(Publisher);
@@ -41,7 +41,7 @@ const SearchForm = ({
     if (categories === "Select All") {
       dispatch(
         searchBook({
-          ComputerNo,
+          computerNo,
           limit,
           Title,
           Author,
@@ -53,7 +53,7 @@ const SearchForm = ({
       );
       dispatch(
         fetchTotalPage({
-          ComputerNo,
+          computerNo,
           limit,
           Title,
           Author,
@@ -68,7 +68,7 @@ const SearchForm = ({
       setCategories(categories);
       dispatch(
         searchBook({
-          ComputerNo,
+          computerNo,
           limit,
           Title,
           Author,
@@ -80,7 +80,7 @@ const SearchForm = ({
       );
       dispatch(
         fetchTotalPage({
-          ComputerNo,
+          computerNo,
           limit,
           Title,
           Author,

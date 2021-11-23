@@ -33,7 +33,7 @@ app.get("/login", (req, res) => {
 
 app.get("/fetchBooks", (req, res) => {
   console.log(req.query);
-  const computerNo = req.query.computerNo;
+  const ComputerNo = req.query.computerNo;
   const page = Number(req.query.page);
   const limit = Number(req.query.limit);
   const Title = req.query.Title;
@@ -48,8 +48,8 @@ app.get("/fetchBooks", (req, res) => {
   let query =
     "select acc, title, author, year, publisher, date, categories, scategories, bstatus from bookmaster where 1=1 ";
 
-  if (computerNo !== "") {
-    query += " and acc = " + computerNo+" ";
+  if (ComputerNo !== "") {
+    query += " and acc = " + ComputerNo+" ";
   }
   if (Title !== "") {
     query += " and title like '%" + Title + "%' ";

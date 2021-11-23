@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
+import { ChevronLeftIcon, ChevronRightIcon, ChevronDoubleRightIcon } from "@heroicons/react/solid";
 import {
   fetchNextPage,
   previousPage,
@@ -122,6 +122,18 @@ const Pagination = (props) => {
     }
   };
 
+  const goToLastPage = ()=>{
+    const computerNo = props.computerNo;
+    const Title = props.Title;
+    const Author = props.Author;
+    const Publisher = props.Publisher;
+    const categories = props.categories;
+    const date = props.date;
+    const Year = props.Year;
+
+    
+  }
+
   const ChangeOffset = (event) => {
     const limit = event.target.value;
     const computerNo = props.computerNo
@@ -220,11 +232,19 @@ const Pagination = (props) => {
             </button>
             <button
               type="button"
-              className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              className="relative inline-flex items-center px-2 py-2  border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
               onClick={() => goToNextPage()}
             >
               <span className="sr-only">Next</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+              onClick={()=>goToLastPage()}
+            >
+              <span className="sr-only">Last Page</span>
+              <ChevronDoubleRightIcon className="h-5 w-5" aria-hidden="true" />
             </button>
           </nav>
         </div>

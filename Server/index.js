@@ -72,7 +72,7 @@ app.get("/fetchBooks", (req, res) => {
   }
 
   if (date !== "") {
-    query += " and date >= " + date + " ";
+    query += " and date >= '" + date + "' ";
   }
 
   query += "limit ?,?";
@@ -132,7 +132,7 @@ app.get("/fetchTotalPage", (req, res) => {
   }
 
   if (date !== "") {
-    query += " and date >= " + date + " ";
+    query += " and date >= '" + date + "' ";
   }
 
   db.query(query, (err, result) => {

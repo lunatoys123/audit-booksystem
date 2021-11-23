@@ -131,7 +131,19 @@ const Pagination = (props) => {
     const date = props.date;
     const Year = props.Year;
 
-    
+    dispatch(
+      fetchToCertainPage({
+        computerNo,
+        nextpage: totalPage,
+        limit,
+        Title,
+        Author,
+        Publisher,
+        categories,
+        date,
+        Year,
+      })
+    );
   }
 
   const ChangeOffset = (event) => {

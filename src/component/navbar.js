@@ -15,6 +15,15 @@ const Navbar = () => {
   const GoToHomePage = () => {
     history.push(ROUTES.MainPagePath);
   };
+
+  const GoToBookPage = () => {
+    history.push(ROUTES.BookPagePath);
+  };
+
+  const Logout = () =>{
+    localStorage.clear();
+    history.push(ROUTES.LoginPagePath)
+  }
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -51,13 +60,19 @@ const Navbar = () => {
                     <button
                       className=" hover:bg-gray-700 text-white
                           px-3 py-2 rounded-md text-sm font-medium"
+                      onClick={() => GoToBookPage()}
                     >
                       Book
                     </button>
                   </div>
                 </div>
-                <div className="absolute inset-y-0 right-0 flex items-center">
-                  <h1 className="text-white">{LoginName}</h1>
+                <div className="flex absolute inset-y-0 right-0 ">
+                  <div className=" flex items-center m-2">
+                    <h1 className="text-white">{LoginName}</h1>
+                  </div>
+                  <div className="flex items-center m-w">
+                    <button className="text-white" onClick={()=>Logout()}>Logout</button>
+                  </div>
                 </div>
               </div>
             </div>

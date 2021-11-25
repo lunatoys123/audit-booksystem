@@ -27,6 +27,10 @@ const Login = () => {
         console.log(response);
       });
   };
+
+  const goToEmployeePage = () =>{
+    history.push(ROUTES.EmployeePagePath);
+  }
   return (
     <div className="bg-white w-screen h-screen flex flex-col">
       {error && <ErrorMessage error={error} setError={setError} />}
@@ -64,7 +68,7 @@ const Login = () => {
                 >
                   Admin Login
                 </button>
-                <p className="mb-3 font-normal">Not An Admin? press here</p>
+                <p className="mb-3 font-normal">Not An Admin? <button className="text-blue-500" onClick={()=>goToEmployeePage()}>press here</button></p>
               </div>
             </form>
           </div>

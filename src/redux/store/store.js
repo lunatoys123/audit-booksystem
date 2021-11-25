@@ -2,6 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import Dataslice from "../user/Dataslice";
 import FormSlice from "../user/FormSlice";
 import userSlice from "../user/userslice";
+import LogSlice from "../user/LogSlice";
+import borrowSlice from "../user/borrowHistorySlice";
+import ClassificationSlice from "../user/ClassificationSlice";
+import ReturnSlice from "../user/ReturnSlice";
 
 const saveToLocalStorage = (state) => {
   try {
@@ -29,6 +33,10 @@ const store = configureStore({
     data: Dataslice,
     Form: FormSlice,
     user: userSlice,
+    Log: LogSlice,
+    borrow: borrowSlice,
+    Classification: ClassificationSlice,
+    Return: ReturnSlice,
   },
   persistedStore
 })

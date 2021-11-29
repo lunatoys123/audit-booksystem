@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Log from "./Log";
 import Sidebar from "../component/sidebar";
 import Borrow from "./borrowHistory";
@@ -18,6 +18,10 @@ const Book = () => {
     { name: "Classification", current: false },
     { name: "Borrow Books History", current: false },
   ]);
+
+  useEffect(() => {
+    document.title = "Book";
+  }, []);
   return (
     <>
       <Navbar />

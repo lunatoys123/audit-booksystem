@@ -34,6 +34,10 @@ const Admin = () => {
     dispatch(GetUserData());
   }, [dispatch]);
 
+  useEffect(()=>{
+    document.title="Admin";
+  },[])
+
   return (
     <>
       <Navbar />
